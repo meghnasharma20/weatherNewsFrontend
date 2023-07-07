@@ -8,12 +8,13 @@ const [condition,setCondition] = useState('')
 
 useEffect(()=>{
     dispatch(getWeather(props.cityname)).then(({payload})=>{
-        setCondition(payload.res.weather[0].conditions)})
+        if(payload.res?.weather?.length>0)
+        setCondition(payload.res?.weather[0].conditions)})
 },[])
 
     return <div style={{backgroundColor : 'yellow'}}>
         <h2>Weather</h2>
-        <p>{condition}</p>
+        <p>{condition?condition : 'No data'}</p>
     </div>
 }
 
